@@ -11,20 +11,34 @@ class App extends Component {
   constructor() {
     super() 
       this.state = {
-        image1: "https://images.pexels.com/photos/418831/pexels-photo-418831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+        image1: "https://images.pexels.com/photos/418831/pexels-photo-418831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        parks: []
     }
+  }
+
+  async componentDidMount() {
+    fetch('http://localhost:3001/')
+    .then(response => response.json())
+    .then(response => {
+      this.setState({
+        parks: response
+      })
+    })
   }
 
   render() {
     return (
-      <div className="App">
-        <Header />
-        <Parallax
-        bgImage= {this.state.image1} strength= {700}>
-            <div style={{height:500}}>
-            </div>
-        </Parallax>
-        <Main />
+      <div className= "App">
+        <div className= "body">
+          <Header />
+          <Parallax
+          bgImage= {this.state.image1} strength= {700}>
+              <div style={{height:400}}>
+              </div>
+          </Parallax>
+          <Main />
+          <Card_Container parks= {this.state.parks}/>
+        </div>
       </div>
     );
   }
