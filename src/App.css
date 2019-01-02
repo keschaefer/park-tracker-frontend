@@ -2,20 +2,42 @@
   font-family: 'Playfair Display', serif;
 }
 
+.custom-container {
+  width: 20em;
+  /* height: 20em; */
+}
+
+.sign-button {
+  display: flex;
+  justify-content: space-around;
+}
+
 .info-content {
   display: flex;
   flex-direction: row;
   margin: 2em;
 }
 
+.info-box {
+  flex: 1;
+  margin: 1em;
+}
+
 .card-header {
   text-align: center;
 }
+
 .card-container {
   display: flex;
   flex-direction: row;
+}
 
-}.card {
+.card {
   width: 30%;
   margin: 1em;
+}
+
+.card-image {
+  width: 90%;
+  margin: 1.5em;
 }
