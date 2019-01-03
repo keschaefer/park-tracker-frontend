@@ -4,12 +4,23 @@
 
 .custom-container {
   width: 20em;
-  /* height: 20em; */
+  display: flex;
+  flex-direction: column;
+}
+
+.park_logo {
+  width: 98%;
+  margin-bottom: 2em;
+  margin-top: 3em;
+  background-color: blue; 
 }
 
 .sign-button {
   display: flex;
   justify-content: space-around;
+  margin-right: 1em;
+  margin-left: 1em;
+  align-items: center;
 }
 
 .info-content {

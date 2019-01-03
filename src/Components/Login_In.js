@@ -5,10 +5,12 @@ const Login = (props) => {
    const { modal_open } = props;
     return (
       <div>
-        <button onClick={props.onOpenModal}>Open modal</button>
+        {/* <button onClick={props.onOpenModal}>Open modal</button> */}
         <Modal open={modal_open} onClose={props.onCloseModal} center>
          <div className="custom-container">
-            <img src=""></img>
+            <div>
+               <img className= "park_logo" src="../parktrkr_logo.png"></img>
+            </div>
                <form className="form">
                   <div className="form-group">
                      <input type="email" className="form-control form-border" aria-describedby="emailHelp" placeholder="Email" required></input>
@@ -18,6 +20,7 @@ const Login = (props) => {
                   </div>
                   <div className="sign-button">
                      <button type="button" className="btn btn-primary">Sign In</button>
+                     <span>OR</span>
                      <button type="button" className="sign-up-button btn btn-secondary">Sign Up</button>
                   </div>
                </form>
