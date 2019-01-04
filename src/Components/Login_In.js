@@ -1,11 +1,11 @@
 import React from "react";
 import Modal from 'react-responsive-modal';
+import { Link } from 'react-router-dom'
 
 const Login = (props) => {
    const { modal_open } = props;
     return (
       <div>
-        {/* <button onClick={props.onOpenModal}>Open modal</button> */}
         <Modal open={modal_open} onClose={props.onCloseModal} center>
          <div className="custom-container">
             <div>
@@ -21,7 +21,9 @@ const Login = (props) => {
                   <div className="sign-button">
                      <button type="button" className="btn btn-primary">Sign In</button>
                      <span>OR</span>
-                     <button type="button" className="sign-up-button btn btn-secondary">Sign Up</button>
+                     <Link to= "/signup">
+                        <button type="button" className="sign-up-button btn btn-secondary" onClick= {props.openSignupModal}>Sign Up</button>
+                     </Link>
                   </div>
                </form>
             </div>

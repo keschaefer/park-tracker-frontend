@@ -5,7 +5,9 @@ import Footer from './Components/Footer.js'
 import Main from './Components/Main.js'
 import Card_Container from './Components/Card_Container.js'
 import Login from './Components/Login_In.js'
+import SignUp from './Components/Sign_Up.js'
 import { Parallax } from 'react-parallax';
+import { Route } from "react-router-dom"
 
 class App extends Component {
   constructor() {
@@ -14,6 +16,7 @@ class App extends Component {
         image1: "https://images.pexels.com/photos/418831/pexels-photo-418831.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
         parks: [],
         modal_open: true,
+        modal_open_signup: false,
     }
   }
 
@@ -27,12 +30,19 @@ class App extends Component {
     })
   }
 
-  onOpenModal = () => {
-    this.setState({ modal_open: true });
+  openSignupModal = () => {
+    this.setState({ modal_open_signup: true });
   }
  
   onCloseModal = () => {
-    this.setState({ modal_open: false });
+    this.setState({ 
+      modal_open: false,
+      modal_open_signup: false, 
+    });
+  }
+
+  onCloseSignupModal = () => {
+    this.setState({ modal_open_signup: false });
   }
 
   render() {
@@ -40,7 +50,9 @@ class App extends Component {
       <div className= "App">
         <div className= "body">
           <Header />
-          <Login onOpenModal= {this.onOpenModal} onCloseModal= {this.onCloseModal} modal_open= {this.state.modal_open}/>
+          <Login openSignupModal= {this.openSignupModal} onCloseModal= {this.onCloseModal} modal_open= {this.state.modal_open}/>
+          {/* <SignUp onOpenModal= {this.onOpenModal} onCloseModal= {this.onCloseModal} modal_open_signup= {this.state.modal_open_signup} /> */}
+          <Route path= "/signup" render= {() => (<SignUp onOpenModal= {this.onOpenModal} onCloseModal= {this.onCloseModal} modal_open_signup= {this.state.modal_open_signup} />)} />
           <Parallax
           bgImage= {this.state.image1} strength= {700}>
               <div style={{height:400}}>
@@ -55,3 +67,6 @@ class App extends Component {
 }
 
 export default App;
+
+{/* <Route exact path= "/" render= {() => (<Main />)} />
+          <Route path= "/movies" render= {() => (<MovieListContainer selectMovie= {this.selectMovie} movies= {this.state.movies_list} populateEditMovie= {this.populateEditMovie} deleteMovie= {this.deleteMovie}/>)} /> */}

@@ -8,6 +8,7 @@
     "react-dom": "^16.6.3",
     "react-parallax": "^2.0.1",
     "react-responsive-modal": "^3.5.1",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.2",
     "reactstrap": "^6.5.0"
   },
