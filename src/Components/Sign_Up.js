@@ -12,19 +12,16 @@ const SignUp = (props) => {
                </div>
                <form>
                   <div className="form-group">
-                     <input type="text" className="form-control form-border" id="first_name" placeholder="First Name" name="first_name"></input>
+                     <input onChange= {props.handleChange} type="text" className="form-control form-border" id="first_name" placeholder="First Name" name="first_name_signup"></input>
                   </div>
                   <div className="form-group">
-                     <input type="text" className="form-control form-border" id="Last_name" placeholder="Last Name" name="last_name"></input>
+                     <input onChange= {props.handleChange} type="text" className="form-control form-border" id="last_name" placeholder="Last Name" name="last_name_signup"></input>
                   </div>
                   <div className="form-group">
-                     <input type="text" className="form-control form-border" id="Username" placeholder="Username" name="username"></input>
+                     <input onChange= {props.handleChange} type="email" className="form-control form-border" id="Email" aria-describedby="emailHelp" placeholder="Email" name="email_signup"></input>
                   </div>
                   <div className="form-group">
-                     <input type="email" className="form-control form-border" id="Email" aria-describedby="emailHelp" placeholder="Email" name="email"></input>
-                  </div>
-                  <div className="form-group">
-                     <input type="password" className="form-control form-border" id="Password1" placeholder="Password" name="password"></input>
+                     <input onChange= {props.handleChange} type="password" className="form-control form-border" id="Password1" placeholder="Password" name="password_signup"></input>
                   </div>
                   <div className="form-group">
                      <input type="password" className="form-control form-border" id="Password2" placeholder="Re-enter Password"></input>

@@ -17,6 +17,12 @@ class App extends Component {
         parks: [],
         modal_open: true,
         modal_open_signup: false,
+        email_signin: "",
+        password_signin: "",
+        first_name_signup: "",
+        last_name_signup: "",
+        email_signup: "",
+        password_signup: "",
     }
   }
 
@@ -45,14 +51,20 @@ class App extends Component {
     this.setState({ modal_open_signup: false });
   }
 
+  handleChange = (event) => {
+    const { value, name } = event.target
+    this.setState({
+      [name]: value
+    })
+  }
+
   render() {
     return (
       <div className= "App">
         <div className= "body">
           <Header />
           <Login openSignupModal= {this.openSignupModal} onCloseModal= {this.onCloseModal} modal_open= {this.state.modal_open}/>
-          {/* <SignUp onOpenModal= {this.onOpenModal} onCloseModal= {this.onCloseModal} modal_open_signup= {this.state.modal_open_signup} /> */}
-          <Route path= "/signup" render= {() => (<SignUp onOpenModal= {this.onOpenModal} onCloseModal= {this.onCloseModal} modal_open_signup= {this.state.modal_open_signup} />)} />
+          <Route path= "/signup" render= {() => (<SignUp onOpenModal= {this.onOpenModal} onCloseModal= {this.onCloseModal} modal_open_signup= {this.state.modal_open_signup} handleChange= {this.handleChange} />)} />
           <Parallax
           bgImage= {this.state.image1} strength= {700}>
               <div style={{height:400}}>

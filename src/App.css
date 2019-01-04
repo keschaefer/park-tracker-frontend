@@ -40,7 +40,9 @@
 
 .card-container {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
+  padding: 3em;
 }
 
 .card {
