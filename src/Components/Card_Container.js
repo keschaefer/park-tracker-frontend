@@ -1,7 +1,7 @@
 import React from "react"
 import Card from "./Card.js"
 
-const Card_Container = (props) => {
+const CardContainer = (props) => {
    return (
       <div className= "card-container">
          <Card parks= {props.parks}/>
@@ -9,4 +9,4 @@ const Card_Container = (props) => {
    )
 }
 
-export default Card_Container
+export default CardContainer
