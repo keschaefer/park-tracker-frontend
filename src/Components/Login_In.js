@@ -9,7 +9,7 @@ const Login = (props) => {
         <Modal open={modal_open} onClose={props.onCloseModal} center>
          <div className="custom-container">
             <div>
-               <img className= "park_logo" src="../parktrkr_logo.png"></img>
+               <img className= "park_logo" src="../parktrkr_logo.png" alt= "parktrkr logo"></img>
             </div>
                <form className="form">
                   <div className="form-group">

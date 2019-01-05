@@ -8,7 +8,7 @@ const SignUp = (props) => {
          <Modal open={modal_open_signup} onClose={props.onCloseModal} center>
             <div className="custom-container">
                <div>
-                  <img className= "park_logo" src="../parktrkr_logo.png"></img>
+                  <img className= "park_logo" src="../parktrkr_logo.png" alt= "parktrkr logo"></img>
                </div>
                <form>
                   <div className="form-group">
@@ -27,7 +27,7 @@ const SignUp = (props) => {
                      <input type="password" className="form-control form-border" id="Password2" placeholder="Re-enter Password"></input>
                   </div>
                   <div className="sign-button">
-                     <button routerLink="" type="submit" className="sign-up-button btn btn-primary">Sign Up</button>
+                     <button onClick= {props.addNewUser} type="submit" className="sign-up-button btn btn-primary">Sign Up</button>
                   </div>
                </form>
             </div>

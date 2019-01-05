@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import Header from './Components/Header.js'
-import Footer from './Components/Footer.js'
+// import Footer from './Components/Footer.js'
 import Main from './Components/Main.js'
-import Card_Container from './Components/Card_Container.js'
+import CardContainer from './Components/Card_Container.js'
 import Login from './Components/Login_In.js'
 import SignUp from './Components/Sign_Up.js'
 import { Parallax } from 'react-parallax';
@@ -23,6 +23,7 @@ class App extends Component {
         last_name_signup: "",
         email_signup: "",
         password_signup: "",
+        currentUser: "",
     }
   }
 
@@ -47,15 +48,32 @@ class App extends Component {
     });
   }
 
-  onCloseSignupModal = () => {
-    this.setState({ modal_open_signup: false });
-  }
-
   handleChange = (event) => {
     const { value, name } = event.target
     this.setState({
       [name]: value
     })
+  }
+
+  addNewUser = (event) => {
+    event.preventDefault()
+    let newUser = {
+      first_name: this.state.first_name_signup,
+      last_name: this.state.last_name_signup,
+      email: this.state.email_signup,
+      password: this.state.password_signup
+    }
+    fetch("https://localhost:3001/createuser", {
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=utf-8"},
+      body: JSON.stringify(newUser)
+    })
+    .then(response => (response.json()))
+    .then(response => {
+      this.setState({ currentUser: response.first_name})
+    })
+    this.onCloseModal()
+    
   }
 
   render() {
@@ -64,14 +82,14 @@ class App extends Component {
         <div className= "body">
           <Header />
           <Login openSignupModal= {this.openSignupModal} onCloseModal= {this.onCloseModal} modal_open= {this.state.modal_open}/>
-          <Route path= "/signup" render= {() => (<SignUp onOpenModal= {this.onOpenModal} onCloseModal= {this.onCloseModal} modal_open_signup= {this.state.modal_open_signup} handleChange= {this.handleChange} />)} />
+          <Route path= "/signup" render= {() => (<SignUp onOpenModal= {this.onOpenModal} onCloseModal= {this.onCloseModal} modal_open_signup= {this.state.modal_open_signup} handleChange= {this.handleChange} addNewUser= {this.addNewUser} />)} />
           <Parallax
           bgImage= {this.state.image1} strength= {700}>
               <div style={{height:400}}>
               </div>
           </Parallax>
           <Main />
-          <Card_Container parks= {this.state.parks}/>
+          <CardContainer parks= {this.state.parks}/>
         </div>
       </div>
     );
@@ -79,6 +97,3 @@ class App extends Component {
 }
 
 export default App;
-
-{/* <Route exact path= "/" render= {() => (<Main />)} />
-          <Route path= "/movies" render= {() => (<MovieListContainer selectMovie= {this.selectMovie} movies= {this.state.movies_list} populateEditMovie= {this.populateEditMovie} deleteMovie= {this.deleteMovie}/>)} /> */}
