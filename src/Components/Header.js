@@ -1,13 +1,19 @@
 import React from "react"
+import { Link } from "react-router-dom"
 
-const Header = () => {
+const Header = (props) => {
    return (
       <div className= "Header">
-        <nav className="navbar navbar-light bg-light">
-             {/* <a class="navbar-brand" href="#">
-            <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" alt=""></img>
-            </a> */}
-            <h1>ParkTrkr</h1>
+         <nav className="navbar navbar-light bg-light">
+            <div className= "header-links">
+               <img src= "../favicon.ico" alt= "tree"></img>
+               <h1>ParkTrkr</h1>
+            </div>
+            <div className= "header-links">
+               <h5 className= "link" onClick= {props.openSigninModal}>Sign In/Sign Up</h5>
+               <h5 className= "link" onClick= {props.signOutUser} >Sign Out</h5>
+               <h5>{`Hello, ${props.currentUser ? props.currentUser: 'welcome!'}`} </h5>  
+            </div>
          </nav>
       </div>
    )

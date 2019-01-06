@@ -38,7 +38,15 @@ class App extends Component {
   }
 
   openSignupModal = () => {
-    this.setState({ modal_open_signup: true });
+    this.setState({ 
+      modal_open_signup: true 
+    });
+  }
+
+  openSigninModal = () => {
+    this.setState({
+      modal_open: true
+    })
   }
  
   onCloseModal = () => {
@@ -55,6 +63,12 @@ class App extends Component {
     })
   }
 
+  signOutUser = () => {
+    this.setState({
+      currentUser: ""
+    })
+  }
+
   addNewUser = (event) => {
     event.preventDefault()
     let newUser = {
@@ -63,7 +77,7 @@ class App extends Component {
       email: this.state.email_signup,
       password: this.state.password_signup
     }
-    fetch("https://localhost:3001/createuser", {
+    fetch("http://localhost:3001/createuser", {
       method: "POST",
       headers: { "Content-Type": "application/json; charset=utf-8"},
       body: JSON.stringify(newUser)
@@ -80,7 +94,8 @@ class App extends Component {
     return (
       <div className= "App">
         <div className= "body">
-          <Header />
+          <Header currentUser= {this.state.currentUser} signOutUser= {this.signOutUser} openSigninModal= {this.openSigninModal}/>
+          {/* <Route exact path= "/" render= {() => (<Login openSignupModal= {this.openSignupModal} onCloseModal= {this.onCloseModal} modal_open= {this.state.modal_open} />)} /> */}
           <Login openSignupModal= {this.openSignupModal} onCloseModal= {this.onCloseModal} modal_open= {this.state.modal_open}/>
           <Route path= "/signup" render= {() => (<SignUp onOpenModal= {this.onOpenModal} onCloseModal= {this.onCloseModal} modal_open_signup= {this.state.modal_open_signup} handleChange= {this.handleChange} addNewUser= {this.addNewUser} />)} />
           <Parallax

@@ -2,6 +2,29 @@
   font-family: 'Playfair Display', serif;
 }
 
+nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-links {
+  display: flex;
+  align-items: center;
+}
+
+.header-links h5 {
+  padding-left: 1em;
+  font-size: 16px;
+}
+
+.link:hover {
+  color: #009933;
+}
+
+.header-links img {
+  height: 2em;
+}
+
 .custom-container {
   width: 20em;
   display: flex;
