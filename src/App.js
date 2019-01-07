@@ -23,6 +23,7 @@ class App extends Component {
         last_name_signup: "",
         email_signup: "",
         password_signup: "",
+        password_confirm: "",
         currentUser: "",
     }
   }
@@ -71,23 +72,37 @@ class App extends Component {
 
   addNewUser = (event) => {
     event.preventDefault()
-    let newUser = {
-      first_name: this.state.first_name_signup,
-      last_name: this.state.last_name_signup,
-      email: this.state.email_signup,
-      password: this.state.password_signup
+    if(this.state.password_signup === this.state.password_confirm) {
+      let newUser = {
+        first_name: this.state.first_name_signup,
+        last_name: this.state.last_name_signup,
+        email: this.state.email_signup,
+        password: this.state.password_signup
+      }
+      fetch("http://localhost:3001/createuser", {
+        method: "POST",
+        headers: { "Content-Type": "application/json; charset=utf-8"},
+        body: JSON.stringify(newUser)
+      })
+      .then(response => (response.json()))
+      .then(response => {
+        this.setState({ currentUser: response.first_name})
+      })
+      this.onCloseModal()
+    } else {
+      alert("Your passwords don't match!")
     }
-    fetch("http://localhost:3001/createuser", {
-      method: "POST",
-      headers: { "Content-Type": "application/json; charset=utf-8"},
-      body: JSON.stringify(newUser)
-    })
-    .then(response => (response.json()))
+  } 
+
+  loginUser = () => {
+    fetch(`http://localhost:3001/signin/${this.state.email_signin}`)
+    .then(response => response.json())
     .then(response => {
-      this.setState({ currentUser: response.first_name})
+      this.setState({
+        currentUser: response[0].first_name
+      })
     })
     this.onCloseModal()
-    
   }
 
   render() {
@@ -95,8 +110,7 @@ class App extends Component {
       <div className= "App">
         <div className= "body">
           <Header currentUser= {this.state.currentUser} signOutUser= {this.signOutUser} openSigninModal= {this.openSigninModal}/>
-          {/* <Route exact path= "/" render= {() => (<Login openSignupModal= {this.openSignupModal} onCloseModal= {this.onCloseModal} modal_open= {this.state.modal_open} />)} /> */}
-          <Login openSignupModal= {this.openSignupModal} onCloseModal= {this.onCloseModal} modal_open= {this.state.modal_open}/>
+          <Login openSignupModal= {this.openSignupModal} onCloseModal= {this.onCloseModal} modal_open= {this.state.modal_open} handleChange= {this.handleChange} loginUser= {this.loginUser}/>
           <Route path= "/signup" render= {() => (<SignUp onOpenModal= {this.onOpenModal} onCloseModal= {this.onCloseModal} modal_open_signup= {this.state.modal_open_signup} handleChange= {this.handleChange} addNewUser= {this.addNewUser} />)} />
           <Parallax
           bgImage= {this.state.image1} strength= {700}>

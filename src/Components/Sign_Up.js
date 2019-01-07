@@ -24,7 +24,7 @@ const SignUp = (props) => {
                      <input onChange= {props.handleChange} type="password" className="form-control form-border" id="Password1" placeholder="Password" name="password_signup"></input>
                   </div>
                   <div className="form-group">
-                     <input type="password" className="form-control form-border" id="Password2" placeholder="Re-enter Password"></input>
+                     <input type="password" className="form-control form-border" id="Password2" placeholder="Re-enter Password" name="password_confirm" onChange= {props.handleChange}></input>
                   </div>
                   <div className="sign-button">
                      <button onClick= {props.addNewUser} type="submit" className="sign-up-button btn btn-primary">Sign Up</button>
