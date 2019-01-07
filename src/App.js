@@ -95,14 +95,18 @@ class App extends Component {
   } 
 
   loginUser = () => {
-    fetch(`http://localhost:3001/signin/${this.state.email_signin}`)
-    .then(response => response.json())
+    fetch(`http://localhost:3001/signin/${this.state.email_signin}/${this.state.password_signin}`)
     .then(response => {
-      this.setState({
-        currentUser: response[0].first_name
-      })
+      if(response.status === 400) {
+        alert("Sorry, login not successful") 
+      } else {
+        console.log(response)
+        this.setState({
+          currentUser: response[0].first_name
+        })
+        this.onCloseModal()
+      }
     })
-    this.onCloseModal()
   }
 
   render() {
