@@ -9,6 +9,8 @@ import SignUp from './Components/Sign_Up.js'
 import { Parallax } from 'react-parallax';
 import { Route } from "react-router-dom"
 
+const isOk = response => response.ok ? response.json() : response.status
+
 class App extends Component {
   constructor() {
     super() 
@@ -84,29 +86,46 @@ class App extends Component {
         headers: { "Content-Type": "application/json; charset=utf-8"},
         body: JSON.stringify(newUser)
       })
-      .then(response => (response.json()))
+      .then(isOk)
       .then(response => {
-        this.setState({ currentUser: response.first_name})
-      })
-      this.onCloseModal()
+        if(response === 500) {
+          alert("Sorry, that user already exist")
+        } else {
+          this.setState({ 
+            currentUser: response.first_name
+          })
+          this.onCloseModal()
+        }
+      })  
     } else {
       alert("Your passwords don't match!")
     }
   } 
 
   loginUser = () => {
-    fetch(`http://localhost:3001/signin/${this.state.email_signin}/${this.state.password_signin}`)
-    .then(response => {
-      if(response.status === 400) {
-        alert("Sorry, login not successful") 
+      let signinUser = {
+        email: this.state.email_signin,
+        password: this.state.password_signin
+      }
+      fetch("http://localhost:3001/signin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json; charset=utf-8"},
+        body: JSON.stringify(signinUser)
+      })
+    .then(isOk)
+    .then(data => {
+      console.log(data)
+      if (data === 404) {
+        alert("Sorry, this user doesn't exist") 
+      } else if (data === 400) {
+        alert("Sorry, password incorrect")
       } else {
-        console.log(response)
         this.setState({
-          currentUser: response[0].first_name
-        })
+          currentUser: data[0].first_name
+        });
         this.onCloseModal()
       }
-    })
+    })    
   }
 
   render() {
