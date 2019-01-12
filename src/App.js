@@ -27,6 +27,7 @@ class App extends Component {
         password_signup: "",
         password_confirm: "",
         currentUser: "",
+        currentUser_id: 0,
     }
   }
 
@@ -68,7 +69,8 @@ class App extends Component {
 
   signOutUser = () => {
     this.setState({
-      currentUser: ""
+      currentUser: "",
+      currentUser_id: 0,
     })
   }
 
@@ -92,7 +94,8 @@ class App extends Component {
           alert("Sorry, that user already exist")
         } else {
           this.setState({ 
-            currentUser: response.first_name
+            currentUser: response.first_name,
+            currentUser_id: response.id
           })
           this.onCloseModal()
         }
@@ -121,7 +124,8 @@ class App extends Component {
         alert("Sorry, password incorrect")
       } else {
         this.setState({
-          currentUser: data[0].first_name
+          currentUser: data[0].first_name,
+          currentUser_id: data[0].id
         });
         this.onCloseModal()
       }
