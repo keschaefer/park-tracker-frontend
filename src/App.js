@@ -28,6 +28,7 @@ class App extends Component {
         password_confirm: "",
         currentUser: "",
         currentUser_id: 0,
+        currentUser_parks: [],
     }
   }
 
@@ -74,6 +75,18 @@ class App extends Component {
     })
   }
 
+  getUserParks = () => {
+    fetch(`http://localhost:3001/userparks/${this.state.currentUser_id}`) 
+    .then(response => response.json())
+    .then(response => console.log(response))
+    .then(response => {
+      this.setState({
+        currentUser_parks: response
+      })
+      console.log("parks returned!")
+    })
+    
+  }
   addNewUser = (event) => {
     event.preventDefault()
     if(this.state.password_signup === this.state.password_confirm) {
@@ -128,6 +141,7 @@ class App extends Component {
           currentUser_id: data[0].id
         });
         this.onCloseModal()
+        this.getUserParks()
       }
     })    
   }
@@ -145,7 +159,7 @@ class App extends Component {
               </div>
           </Parallax>
           <Main />
-          <CardContainer parks= {this.state.parks}/>
+          <CardContainer parks= {this.state.parks} currentUser_parks= {this.currentUser_parks}/>
         </div>
       </div>
     );

@@ -73,6 +73,12 @@ nav {
   margin: 1em;
 }
 
+.card-accomplished {
+  width: 30%;
+  margin: 1em;
+  box-shadow: 0 8px 12px 0 rgba(245, 5, 5, 0.2), 0 6px 20px 0 rgba(8, 41, 226, 0.19);
+}
+
 .card-image {
   width: 90%;
   margin: 1.5em;

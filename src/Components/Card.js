@@ -5,7 +5,7 @@ const Card = (props) => {
       return (
       props.parks.map(park => {
          return (
-            <div className="card" key= {park.id}>
+            <div className="card card-accomplished" key= {park.id}>
                <img className="card-image rounded" src={park.image} alt="national park"></img>
                <div className="card-body">
                   <p className= "card-title title">{park.name}</p>
