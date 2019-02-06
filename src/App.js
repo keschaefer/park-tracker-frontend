@@ -52,6 +52,7 @@ class App extends Component {
     this.setState({
       modal_open: true
     })
+    console.log('opening modal')
   }
  
   onCloseModal = () => {
@@ -78,15 +79,28 @@ class App extends Component {
   getUserParks = () => {
     fetch(`http://localhost:3001/userparks/${this.state.currentUser_id}`) 
     .then(response => response.json())
-    .then(response => console.log(response))
     .then(response => {
       this.setState({
         currentUser_parks: response
       })
-      console.log("parks returned!")
+      this.filterNotVisited()
     })
-    
   }
+
+  filterNotVisited = () => {
+    let notVisited = []
+    for(let i=0; i< this.state.parks.length; i++) {
+        for(let j=0; j< this.state.currentUser_parks.length; j++) {
+          if (this.state.parks[i].id !== this.state.currentUser_parks[j].id) {
+            notVisited.push(this.state.parks[i])
+          }
+      }
+    }
+    this.setState({
+      parks: notVisited
+    })
+  }
+
   addNewUser = (event) => {
     event.preventDefault()
     if(this.state.password_signup === this.state.password_confirm) {
@@ -130,7 +144,6 @@ class App extends Component {
       })
     .then(isOk)
     .then(data => {
-      console.log(data)
       if (data === 404) {
         alert("Sorry, this user doesn't exist") 
       } else if (data === 400) {
@@ -158,8 +171,8 @@ class App extends Component {
               <div style={{height:400}}>
               </div>
           </Parallax>
-          <Main />
-          <CardContainer parks= {this.state.parks} currentUser_parks= {this.currentUser_parks}/>
+          <Main openSigninModal= {this.openSigninModal}/>
+          <CardContainer parks= {this.state.parks} currentUser_parks= {this.state.currentUser_parks}/>
         </div>
       </div>
     );

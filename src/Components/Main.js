@@ -1,6 +1,7 @@
 import React from "react"
 
-const Main = () => {
+const Main = (props) => {
+   console.log(props)
    return(
       <div className= 'main-content'>
          <div className= 'info-content'>
@@ -9,7 +10,7 @@ const Main = () => {
             <div className= "info-box">Leave reviews for parks and make suggestions to fellow outdoor enthusiasts.</div>
          </div>
          <div className= "card-header">
-         Start Browsing or sign up <button>HERE</button>to start tracking your own progress</div>
+         Start Browsing or sign up <button onClick= {props.openSigninModal}>HERE</button> to start tracking your own progress</div>
       </div>
    )
 }
